@@ -12,7 +12,8 @@ class SKActionView: UIView {
     internal weak var browser: SKPhotoBrowser?
     internal var closeButton: SKCloseButton!
     internal var deleteButton: SKDeleteButton!
-    
+    fileprivate var gradientLayer = CAGradientLayer()
+
     // Action
     fileprivate var cancelTitle = "Cancel"
     
@@ -40,6 +41,11 @@ class SKActionView: UIView {
             return nil
         }
         return nil
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        gradientLayer.frame = CGRect(origin: .zero, size: CGSize(width: bounds.width, height: 100))
     }
     
     func updateFrame(frame: CGRect) {
@@ -87,6 +93,13 @@ class SKActionView: UIView {
 }
 
 extension SKActionView {
+    func configureGradientLayer() {
+        gradientLayer.colors = [UIColor.black.withAlphaComponent(0.5), UIColor.black.withAlphaComponent(0)].map({ $0.cgColor })
+        gradientLayer.startPoint = CGPoint(x: 0.5, y: 0)
+        gradientLayer.endPoint = CGPoint(x: 0.5, y: 1)
+        gradientLayer.frame = CGRect(origin: .zero, size: CGSize(width: bounds.width, height: 100))
+    }
+
     func configureCloseButton(image: UIImage? = nil, size: CGSize? = nil) {
         if closeButton == nil {
             closeButton = SKCloseButton(frame: .zero)
