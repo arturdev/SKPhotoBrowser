@@ -98,6 +98,7 @@ extension SKActionView {
         gradientLayer.startPoint = CGPoint(x: 0.5, y: 0)
         gradientLayer.endPoint = CGPoint(x: 0.5, y: 1)
         gradientLayer.frame = CGRect(origin: .zero, size: CGSize(width: bounds.width, height: 100))
+        layer.insertSublayer(gradientLayer, at: 0)
     }
 
     func configureCloseButton(image: UIImage? = nil, size: CGSize? = nil) {
